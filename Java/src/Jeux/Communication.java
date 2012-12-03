@@ -21,7 +21,7 @@ public class Communication {
 	public void envoiReception(){
 		 SAXBuilder sxb = new SAXBuilder();
 		 try {
-			document = sxb.build(new URL("http://" + jeux.getServeur()+ "/" + "Serveur.php" + "?" + requete ));
+			document = sxb.build(new URL("http://" + jeux.getServeur()+ "/" + "php" + "/" + "Serveur.php" + "?" + requete ));
 			System.out.println("Envoi Requette : " + "http://" + jeux.getServeur()+ "/" + "Serveur.php" + "?" +requete);
 		} catch (MalformedURLException e) {
 			System.out.println("Mauvais Url");

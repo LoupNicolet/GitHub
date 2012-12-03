@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<partie id="0">
-	<nomjoueur>Joueur</nomjoueur>
+<partie id="34">
+	<nomjoueur>Joueur1</nomjoueur>
 	<tour>0</tour>
+	<etat>vrai</etat>
 	<plateau>
 		<flotte>
 			<case id="00">0</case>
