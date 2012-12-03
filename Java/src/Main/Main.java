@@ -1,0 +1,15 @@
+package Main;
+
+import javax.swing.JFrame;
+
+import IHM.IHM;
+
+public class Main {
+	
+	public static void main(String [] args){
+		IHM ihm= new IHM();
+		ihm.pack();
+		ihm.setVisible(true);
+		ihm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+}
+}
