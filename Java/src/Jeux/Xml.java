@@ -7,6 +7,9 @@ import org.jdom2.Element;
 
 public class Xml {
 	
+	///////////////////////////////Déclarations
+	
+	//Elements
 	private Element ePartie;
 	private Element eNomJoueur;
 	private Element eTour;
@@ -17,22 +20,31 @@ public class Xml {
 	private Element eTactique;
 	private Element eTampTactique;
 	
+	//Listes d'Elements
 	private List<Element> eSousMenus;
 	private List<Element> eSousMenusGrilles;
 	private List<Element> eSousMenusGrillesFlotte;
 	private List<Element> eSousMenusGrillesTactique;
 	
+	//String
 	private String idPartie;
 	private String nomJoueur;
 	private String tour;
 	private String etat;
+	
+	//Tableaux de String
 	private String[] grilleFlotte = new String[100];
 	private String[] grilleTactique = new String[100];
 	
+	
+	///////////////////////////////////////Constucteur
 	public Xml(){
 		
 	}
 	
+	///////////////////////////////////////Fonctions
+	
+	//Lecture XML
 	public void Parse(Document Doc){
 		ePartie = Doc.getRootElement();
 		idPartie = ePartie.getAttributeValue("id");
@@ -60,6 +72,9 @@ public class Xml {
 					Afficher();
 	}
 	
+//////////////////////////////////
+	
+	//Afficher le XML dans la console
 	public void Afficher(){
 		System.out.println("Partieid : "+idPartie);
 		System.out.println("\t NomJoueur : "+nomJoueur);
@@ -76,6 +91,8 @@ public class Xml {
 			System.out.println("\t\t\t\t "+j+" : "+grilleTactique[j]);
 		}
 	}
+	
+/////////////////////////////////////////Accesseurs
 	
 	public String getIdPartie() {
 		return idPartie;
@@ -95,6 +112,10 @@ public class Xml {
 	
 	public String[] getGrilleFlotte() {
 		return grilleFlotte;
+	}
+	
+	public String[] getGrilleTactique() {
+		return grilleTactique;
 	}
 
 }
