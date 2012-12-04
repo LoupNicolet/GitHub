@@ -26,6 +26,7 @@ public class Jeux {
 		Ihm.tfAdd.setEnabled(false);
 		Ihm.tfIdPartie.setEnabled(false);
 		Com.reqJoueurIA();
+		System.out.println("Jeux");
 	}
 
 	public String getServeur() {
