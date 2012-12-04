@@ -13,9 +13,19 @@ try
 	{
         die('Erreur : '.$e->getMessage());
     }
-		
-if(isset($_GET["action"])){$Action = $_GET["action"];}else{$Action = "";}
-if(isset($_GET["idpartie"])){$IdPartie = $_GET["idpartie"];}else{$IdPartie = "";}
+	
+	
+if(isset($_GET["action"])){
+	$Action = $_GET["action"];
+}else{
+	$Action = "";
+}
+
+if(isset($_GET["idpartie"])){
+	$IdPartie = $_GET["idpartie"];
+}else{
+	$IdPartie = "";
+}
 
 if($Action == "joueurIA"){
 	$reponse = $bdd->query('SELECT * FROM partie WHERE idpartie = '.$IdPartie);
@@ -30,8 +40,13 @@ if($Action == "joueurIA"){
 			$bdd->exec('INSERT INTO '.$IdPartie.'_Joueur2 (ID,valeur) VALUES ('.$i.',0)');
 		}
 		header('location:Gen_XML.php?action='.$Action.'&idpartie='.$IdPartie.'&valide=vrai');
+		//$Action = 'RetJoueurIA';
+		//header('location:Serveur.php?action='.$Action.'&valide=vrai');
 	}else{
 		header('location:Gen_XML.php?action='.$Action.'&idpartie='.$IdPartie.'&valide=faux');
+		//$Action = 'RetJoueurIA';
+		//header('location:Serveur.php?action='.$Action'&valide=faux');
 	}
 }
+
 ?>
