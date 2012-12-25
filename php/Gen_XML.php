@@ -20,11 +20,11 @@ if(isset($_GET["valide"])){$Valide = $_GET["valide"];}else{$Valide = "";}
 
 if($Action == "joueurIA"){
 	if($Valide == "vrai"){
-		$Nom = 'Joueur1';
+		$Nom = 'joueur1';
 		$Tour = 0;
 		$Couleur = 'B';
 	}else if($Valide == "faux"){
-		$Nom = 'Joueur1';
+		$Nom = 'joueur1';
 		$Tour = 0;
 		$Couleur = 'R';
 	}

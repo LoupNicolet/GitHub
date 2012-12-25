@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<partie id="123">
+<partie id="1">
 	<nomjoueur>Joueur1</nomjoueur>
 	<tour>0</tour>
 	<etat>vrai</etat>
