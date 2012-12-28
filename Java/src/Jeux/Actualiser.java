@@ -4,11 +4,13 @@ import java.awt.Color;
 
 import IHM.IHM;
 
-public class Actualiser extends IHM{
+public class Actualiser{
+	
+	private IHM Ihm;
 	
 	////////////////////////////////////////Constucteur
-	public Actualiser(){
-		
+	public Actualiser(IHM Ihm){
+		this.Ihm = Ihm;
 	}
 	
 	///////////////////////////////////////Fonctions
@@ -20,25 +22,25 @@ public class Actualiser extends IHM{
 		
 		//Si JoueurIA et Création Nouvelle partie OK
 		if(etat.equals("vrai")){
-			labNorth.setForeground(new Color(255,0,0));
-			labNorth.setText("Placez votre flotte, pour cela entrez les coordonnées des extrémitées de chaque bateau");
-			labPlacerBateau.setText("Porte-Avion (5 case)");
-			butValiderPlacement.setEnabled(true);
-			tfBatCo1.setEnabled(true);
-			tfBatCo2.setEnabled(true);
-			tfBatCo1.setBackground(new Color(255,255,255));
-			tfBatCo2.setBackground(new Color(255,255,255));
+			Ihm.labNorth.setForeground(new Color(255,0,0));
+			Ihm.labNorth.setText("Placez votre flotte, pour cela entrez les coordonnées des extrémitées de chaque bateau");
+			Ihm.labPlacerBateau.setText("Porte-Avion (5 case)");
+			Ihm.butValiderPlacement.setEnabled(true);
+			Ihm.tfBatCo1.setEnabled(true);
+			Ihm.tfBatCo2.setEnabled(true);
+			Ihm.tfBatCo1.setBackground(new Color(255,255,255));
+			Ihm.tfBatCo2.setBackground(new Color(255,255,255));
 		}
 		
 		//Si JoueurIA et Création Nouvelle partie Pas OK
 		if(etat.equals("faux")){
-			labNorth.setForeground(new Color(255,0,0));
-			labNorth.setText("Votre numéro de partie est déjà utilisé, veuillez en choisir un autre.");
-			butIA.setEnabled(true);
-			tfAdd.setEnabled(true);
-			tfIdPartie.setEnabled(true);
-			tfAdd.setBackground(new Color(255,255,255));
-			tfIdPartie.setBackground(new Color(255,255,255));
+			Ihm.labNorth.setForeground(new Color(255,0,0));
+			Ihm.labNorth.setText("Votre numéro de partie est déjà utilisé, veuillez en choisir un autre.");
+			Ihm.butIA.setEnabled(true);
+			Ihm.tfAdd.setEnabled(true);
+			Ihm.tfIdPartie.setEnabled(true);
+			Ihm.tfAdd.setBackground(new Color(255,255,255));
+			Ihm.tfIdPartie.setBackground(new Color(255,255,255));
 			
 		}
 	}

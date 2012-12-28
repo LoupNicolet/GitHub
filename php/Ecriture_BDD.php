@@ -32,8 +32,11 @@ if($_GET["action"] == "joueurIA"){
 	}
 }
 else if($_GET["action"] == "placement"){
-	if($GET["bateau"] == "Porte-Avion (5 case)"){$boucle = 5;}
-	//faire le chemin des case $case[]
+	if($_GET["bateau"] == "Porte-Avion (5 case)"){$boucle = 5;}
+	//faire le chemin des case $case[]  A0 E0   B4 A2
+	for($j = 0;$i<$boucle;$i++){
+		
+	}
 	for($i = 0;$i<$boucle;$i++){
 		$reponse = $bdd->query('SELECT valeur FROM '.$_GET['idpartie'].'_'.$_GET['nom'].' WHERE ID = '.$case[$i]);
 		$donnees = $reponse->fetch();

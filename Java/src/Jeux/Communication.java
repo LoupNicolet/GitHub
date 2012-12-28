@@ -8,6 +8,8 @@ import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
+import IHM.IHM;
+
 public class Communication implements Runnable {
 	
 	/////////////////////////////////Déclarations
@@ -22,10 +24,10 @@ public class Communication implements Runnable {
 	public int action = 0;
 	
 	/////////////////////////////////Constucteur
-	public Communication(Jeux jeux){
+	public Communication(Jeux jeux,IHM ihm){
 		this.jeux = jeux;
 		xml = new Xml();
-		actualiser = new Actualiser();
+		actualiser = new Actualiser(ihm);
 	}
 	
 	/////////////////////////////////Fonctions

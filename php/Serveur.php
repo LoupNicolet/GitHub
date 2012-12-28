@@ -10,6 +10,6 @@ else if($_GET["action"] == "RetJoueurIA"){
 		echo $xml->asXml();
 }
 else if($_GET["action"] == "placement"){
-	header('location:Valider.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&nom='.$_GET['nom'].'&bateau='.$_GET['bateau'].'&co1'.$_GET['co1'].'&co2'.$_GET['co2']);
+	header('location:Valider.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&nom='.$_GET['nom'].'&bateau='.$_GET['bateau'].'&co1='.$_GET['co1'].'&co2='.$_GET['co2']);
 }
 ?>

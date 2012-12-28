@@ -46,7 +46,7 @@ public class IHM extends JFrame implements ActionListener {
 	private int caseLigCur = 0;
 	private int caseColCur = 0;
 	//Objet
-	private Jeux jeux;
+	private Jeux jeux = new Jeux(this);
 	
 	////////////////////////////////////////////Constructeur
 	public IHM() {
@@ -92,7 +92,7 @@ public class IHM extends JFrame implements ActionListener {
 		labNorth.setForeground(new Color(255,0,0));
 		
 		//Création d'une instance de Jeux
-		jeux = new Jeux();
+		
 	}
 	
 	
@@ -110,12 +110,12 @@ public class IHM extends JFrame implements ActionListener {
 				//Recuperation de la case
 				Case(e);
 				//Changement de sa couleur
-				CaseE[caseLigCur][caseColCur].setBackground(new Color(0,0,100));
+				CaseE[caseLigCur+1][caseColCur+1].setBackground(new Color(0,0,100));
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				Case(e);
-				CaseE[caseLigCur][caseColCur].setBackground(new Color(255,255,255));
+				CaseE[caseLigCur+1][caseColCur+1].setBackground(new Color(255,255,255));
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -142,8 +142,8 @@ public class IHM extends JFrame implements ActionListener {
 					colone = 1;
 				}
 				if(e.getSource() == CaseE[i][j]){
-					caseColCur = colone;
-					caseLigCur = ligne;
+					caseColCur = colone-1;
+					caseLigCur = ligne-1;
 					j = 1000;
 					i = 1000;
 				}
@@ -245,8 +245,8 @@ public class IHM extends JFrame implements ActionListener {
 		}
 		//Pour la première colone
 		for(int col=1;col<11;col++){
-			CaseW[0][col].setText(""+col);
-			CaseE[0][col].setText(""+col);
+			CaseW[0][col].setText(""+(col-1));
+			CaseE[0][col].setText(""+(col-1));
 			CaseW[0][col].setForeground(new Color(255,255,255));
 			CaseE[0][col].setForeground(new Color(255,255,255));
 			CaseW[0][col].setBorder(BorderFactory.createLineBorder(new Color(0,0,0)));
