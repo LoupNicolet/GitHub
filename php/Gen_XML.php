@@ -42,6 +42,30 @@ if($Action == "joueurIA"){
 	}
 }
 
+if($Action == "placement"){
+	if($Valide == "vrai"){
+		$Nom = 'joueur1';
+		$Tour = 0;
+		$Couleur = 'B';
+	}else if($Valide == "faux"){
+		$Nom = 'joueur1';
+		$Tour = 0;
+		$Couleur = 'R';
+	}
+	for($i = 0 ; $i < 100 ; $i++){
+     
+	  $reponse = $bdd->query('SELECT valeur FROM '.$IdPartie.'_joueur1 WHERE ID = '.$i);
+	  $donnees = $reponse->fetch();
+	  $CaseFlotte[$i] = $donnees['valeur'];
+	  $reponse->closeCursor();
+	   
+	  $reponse = $bdd->query('SELECT valeur FROM '.$IdPartie.'_joueur2 WHERE ID = '.$i);
+	  $donnees= $reponse->fetch();
+	  $CaseTactique[$i] = $donnees['valeur'];
+	  $reponse->closeCursor();
+	}
+}
+
 $xml = <<<XML
 <?xml version="1.0" encoding="utf-8" ?>
 <partie id='$IdPartie'>
@@ -261,6 +285,10 @@ $Partie = new SimpleXMLElement($xml);
 
 if($Action == "joueurIA"){
 	$Action = 'RetJoueurIA';
+	header('location:Serveur.php?action='.$Action);
+}
+else if($Action == "placement"){
+	$Action = 'Retplacement';
 	header('location:Serveur.php?action='.$Action);
 }
 
