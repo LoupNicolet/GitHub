@@ -20,10 +20,12 @@ if(isset($_GET["valide"])){$Valide = $_GET["valide"];}else{$Valide = "";}
 
 if($Action == "joueurIA"){
 	if($Valide == "vrai"){
+		$etat="vrai";
 		$Nom = 'joueur1';
 		$Tour = 0;
 		$Couleur = 'B';
 	}else if($Valide == "faux"){
+		$etat = "faux";
 		$Nom = 'joueur1';
 		$Tour = 0;
 		$Couleur = 'R';
@@ -44,10 +46,12 @@ if($Action == "joueurIA"){
 
 if($Action == "placement"){
 	if($Valide == "vrai"){
+		$etat = "vraiPlacement";
 		$Nom = 'joueur1';
 		$Tour = 0;
 		$Couleur = 'B';
 	}else if($Valide == "faux"){
+		$etat = "fauxPlacement";
 		$Nom = 'joueur1';
 		$Tour = 0;
 		$Couleur = 'R';
@@ -71,7 +75,7 @@ $xml = <<<XML
 <partie id='$IdPartie'>
 	<nomjoueur>$Nom</nomjoueur>
 	<tour>$Tour</tour>
-	<etat>$Valide</etat>
+	<etat>$etat</etat>
 	<plateau>
 		<flotte>
 			<case id="00">$CaseFlotte[0]</case>
@@ -286,10 +290,12 @@ $Partie = new SimpleXMLElement($xml);
 if($Action == "joueurIA"){
 	$Action = 'RetJoueurIA';
 	header('location:Serveur.php?action='.$Action);
+	
 }
 else if($Action == "placement"){
 	$Action = 'Retplacement';
 	header('location:Serveur.php?action='.$Action);
+	
 }
 
 $File = fopen("XML.xml", 'w+');

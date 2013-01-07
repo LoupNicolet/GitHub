@@ -38,8 +38,8 @@ public class IHM extends JFrame implements ActionListener {
 	public JTextField tfBatCo1 = new JTextField();
 	public JTextField tfBatCo2 = new JTextField();
 	//Grilles
-	private JLabel[][] CaseW = new JLabel[11][11];
-	private JLabel[][] CaseE = new JLabel[11][11];
+	public JLabel[][] CaseW = new JLabel[11][11];
+	public JLabel[][] CaseE = new JLabel[11][11];
 	//Souris
 	private MouseListener mouseListener;
 	//Variables

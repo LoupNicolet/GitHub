@@ -50,11 +50,9 @@ public class Communication implements Runnable {
 	
 	//Envoi requete, placement d'un bateau
 	public void reqValiderPlacement(String Bateau,String Co1,String Co2){
-		//http://127.0.0.1/Serveur.php?action=placement&idpartie=1&nom=Joueur1&bateau=Porte-Avion (5 case)&co1=A2&co2=D7
-		requete = "action=placement&idpartie="+ jeux.getIdPartie() + "&nom=" + xml.getNomJoueur() + "&bateau=" + Bateau + "&co1=" + Co1 + "&co2=" + Co2;
-		//envoiReception();
-		jeux.Ihm.butIA.setEnabled(true);
-		jeux.Ihm.tfIdPartie.setEnabled(true);
+		//http://127.0.0.1/Serveur.php?action=placement&idpartie=1&nom=Joueur1&bateau=Porte-Avion(5case)&co1=A2&co2=D7
+		requete = "action=placement&idpartie=" + jeux.getIdPartie() + "&nom=" + xml.getNomJoueur() + "&bateau=" + Bateau + "&co1=" + Co1 + "&co2=" + Co2;
+		envoiReception();
 	}
 
 	///////////////////
@@ -66,8 +64,9 @@ public class Communication implements Runnable {
 		 try {
 			 //Envoi et Reception du document
 			//document = new Document();
-			document = sxb.build(new URL("http://" + jeux.getServeur()+ "/" + "php" + "/" + "Serveur.php" + "?" + requete ));
-			System.out.println("Envoi Requette : " + "http://" + jeux.getServeur()+ "/" + "php" + "/" +"Serveur.php" + "?" +requete);
+			document = null;
+			document = sxb.build(new URL("http://" + jeux.getServeur() + "/" + "php" + "/" + "Serveur.php" + "?" + requete ));
+			System.out.println("Envoi Requette : " + "http://" + jeux.getServeur() + "/" + "php" + "/" +"Serveur.php" + "?" +requete);
 		} catch (MalformedURLException e) {
 			System.out.println("Mauvais Url");
 			e.printStackTrace();

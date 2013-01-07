@@ -27,12 +27,16 @@
 				$bdd->exec('INSERT INTO '.$_GET["idpartie"].'_Joueur2 (ID,valeur) VALUES ('.$i.',0)');
 			}
 			header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&valide=vrai');
+			
+							
 		}else{
 			header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&valide=faux');
+			
+							
 		}
 	}
 	else if($_GET["action"] == "placement"){
-		if($_GET["bateau"] == "Porte-Avion (5 case)"){$boucle = 5;}
+		if($_GET["bateau"] == "Porte-Avion(5case)"){$boucle = 5;}
 		//faire le chemin des case $case[]  A0 E0   B4 A2
 		$TabCo1 = str_split($_GET['co1']); //02
 		$TabCo2 = str_split($_GET['co2']); //42
@@ -59,9 +63,8 @@
 				$bdd->query('UPDATE '.$_GET['idpartie'].'_'.$_GET['nom'].' SET valeur="1" WHERE ID='.$Split_Chemin[($i*2)-2].$Split_Chemin[($i*2)-1]);
 			}else{
 				header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&valide=faux');
-				exit();
 			}
 		}
-		header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&valide=vrai');
+		header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&valide=vrai');			
 	}
 ?>

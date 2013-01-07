@@ -3,6 +3,7 @@
 
 if($_GET["action"] == "joueurIA"){
 	 header('location:Ecriture_BDD.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"]);
+	 
 }
 else if($_GET["action"] == "RetJoueurIA"){
 		header("Content-type:text/xml");
@@ -11,6 +12,7 @@ else if($_GET["action"] == "RetJoueurIA"){
 }
 else if($_GET["action"] == "placement"){
 	header('location:Valider.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&nom='.$_GET['nom'].'&bateau='.$_GET['bateau'].'&co1='.$_GET['co1'].'&co2='.$_GET['co2']);
+	
 }
 else if($_GET["action"] == "Retplacement"){
 		header("Content-type:text/xml");
