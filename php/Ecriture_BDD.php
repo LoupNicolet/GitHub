@@ -37,6 +37,10 @@
 	}
 	else if($_GET["action"] == "placement"){
 		if($_GET["bateau"] == "Porte-Avion(5case)"){$boucle = 5;}
+		else if($_GET["bateau"] == "Cuirasse(4case)"){$boucle = 4;}
+		else if($_GET["bateau"] == "Destroyer(3case)"){$boucle = 3;}
+		else if($_GET["bateau"] == "Sous-Marin(3case)"){$boucle = 3;}
+		else if($_GET["bateau"] == "Torpilleur(2case)"){$boucle = 2;}
 		//faire le chemin des case $case[]  A0 E0   B4 A2
 		$TabCo1 = str_split($_GET['co1']); //02
 		$TabCo2 = str_split($_GET['co2']); //42
@@ -58,12 +62,15 @@
 		for($i = 1;$i<($boucle+1);$i++){
 			$reponse = $bdd->query('SELECT valeur FROM '.$_GET['idpartie'].'_'.$_GET['nom'].' WHERE ID = '.$Split_Chemin[($i*2)-2].$Split_Chemin[($i*2)-1]);
 			$donnees = $reponse->fetch();
-			$reponse->closeCursor();
-			if($donnees[0] == '0'){
-				$bdd->query('UPDATE '.$_GET['idpartie'].'_'.$_GET['nom'].' SET valeur="1" WHERE ID='.$Split_Chemin[($i*2)-2].$Split_Chemin[($i*2)-1]);
-			}else{
+			//echo $donnees[0];
+			if($donnees[0]){
 				header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&valide=faux');
+				exit();
 			}
+			$reponse->closeCursor();
+		}
+		for($i = 1;$i<($boucle+1);$i++){
+			$bdd->query('UPDATE '.$_GET['idpartie'].'_'.$_GET['nom'].' SET valeur="1" WHERE ID='.$Split_Chemin[($i*2)-2].$Split_Chemin[($i*2)-1]);
 		}
 		header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&valide=vrai');			
 	}

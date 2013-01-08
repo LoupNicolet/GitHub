@@ -1,6 +1,6 @@
 <?php
 	if($_GET["action"] == "placement"){
-		if($_GET['bateau'] == 'Porte-Avion(5case)'){
+		//if($_GET['bateau'] == 'Porte-Avion(5case)'){
 			if(strlen($_GET['co1']) > 2){
 				//Si c'est pas le bon format
 				header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&valide=faux');
@@ -42,6 +42,11 @@
 						else if($TabCo2[0] == 'J'){$TabCo2[0] = 9;}
 						//echo $TabCo2[0];
 						if($_GET["bateau"] == "Porte-Avion(5case)"){$Case = 4;}
+						else if($_GET["bateau"] == "Cuirasse(4case)"){$Case = 3;}
+						else if($_GET["bateau"] == "Destroyer(3case)"){$Case = 2;}
+						else if($_GET["bateau"] == "Sous-Marin(3case)"){$Case = 2;}
+						else if($_GET["bateau"] == "Torpilleur(2case)"){$Case = 1;}
+						//50 10 
 						if($TabCo1[0]+$Case == $TabCo2[0]){
 							if($TabCo1[1] == $TabCo2[1]){
 								//echo '1bonne case';
@@ -55,7 +60,7 @@
 						}else if($TabCo1[0]-$Case == $TabCo2[0]){
 							if($TabCo1[1] == $TabCo2[1]){
 								//echo '3bonne case';
-								header('location:Ecriture_BDD.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&nom='.$_GET['nom'].'&bateau='.$_GET['bateau'].'&co1='.$TabCo1[0].$TabCo1[1].'&co2='.$TabCo2[0].$TabCo2[1]);
+								header('location:Ecriture_BDD.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&nom='.$_GET['nom'].'&bateau='.$_GET['bateau'].'&co1='.$TabCo2[0].$TabCo2[1].'&co2='.$TabCo1[0].$TabCo1[1]);
 								
 							}else{
 								//echo '4mauvaise case';
@@ -69,7 +74,7 @@
 								
 							}else if($TabCo1[1]-$Case == $TabCo2[1]){
 								//echo '5bonne case';
-								header('location:Ecriture_BDD.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&nom='.$_GET['nom'].'&bateau='.$_GET['bateau'].'&co1='.$TabCo1[0].$TabCo1[1].'&co2='.$TabCo2[0].$TabCo2[1]);
+								header('location:Ecriture_BDD.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&nom='.$_GET['nom'].'&bateau='.$_GET['bateau'].'&co1='.$TabCo2[0].$TabCo2[1].'&co2='.$TabCo1[0].$TabCo1[1]);
 								
 							}else if($TabCo1[1] == $TabCo2[1]){
 								//echo '5mauvaise case';
@@ -93,6 +98,6 @@
 				}
 			}
 			
-		}
+		//}
 	}
 ?>
