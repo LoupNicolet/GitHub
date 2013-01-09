@@ -74,4 +74,76 @@
 		}
 		header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&valide=vrai');			
 	}
+	
+	else if($_GET["action"] == "attente"){
+		
+		if($_GET["tour"] == 0){
+		if($_GET["nom"] == "joueur1"){
+			$nom = "joueur2";
+		}else{
+			$nom = "joueur1";
+		}
+		echo "salut";
+			for($a=0;$a<5;$a++){
+				if($a == 0){$boucle = 5;}
+				else if($a == 1){$boucle = 4;}
+				else if($a == 2){$boucle = 3;}
+				else if($a == 3){$boucle = 3;}
+				else if($a == 4){$boucle = 2;}
+				//faire le chemin des case $case[]  A0 E0   B4 A2
+				
+				$col = rand(0,9);
+				$ver = rand(0,9);
+				$sens = rand(0,1);
+				$verR = $ver;
+				$colV = $col;
+				$Chemin = $ver.$col;
+				for($j = 0;$j<$boucle-1;$j++){
+					if($sens == 1){
+						if($verR < ($boucle+1)){
+							$ver++;
+						}else{
+							$ver--;
+						}
+						$Res = $ver.$col;
+					}else{
+						if($colV < ($boucle+1)){
+							$col++;
+						}else{
+							$col--;
+						}
+						$Res = $ver.$col;
+					}
+					$Chemin = $Chemin.$Res;
+				}
+				$Split_Chemin = str_split($Chemin);
+				$faux = false;
+				for($i = 1;$i<($boucle+1);$i++){
+					echo "i:".$i."a:".$a."faux:".$faux."<br>";
+					$reponse = $bdd->query('SELECT valeur FROM '.$_GET['idpartie'].'_'.$nom.' WHERE ID = '.$Split_Chemin[($i*2)-2].$Split_Chemin[($i*2)-1]);
+					$donnees = $reponse->fetch();
+					//echo $donnees[0];
+					if($donnees[0]){
+						$faux = true;
+						
+						/*header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&tour='.$_GET["tour"].'&valide=faux');
+						exit();*/
+					}
+					$reponse->closeCursor();
+				}
+				if(!$faux){
+					for($i = 1;$i<($boucle+1);$i++){
+						$bdd->query('UPDATE '.$_GET['idpartie'].'_'.$nom.' SET valeur="1" WHERE ID='.$Split_Chemin[($i*2)-2].$Split_Chemin[($i*2)-1]);
+					}
+				}else{
+					$a--;
+				}
+				//header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&valide=vrai');
+			}
+			header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&tour='.$_GET["tour"].'&nom='.$_GET["nom"].'&valide=true');
+			exit();
+		}else{
+		echo "au revoir";
+		}
+	}
 ?>

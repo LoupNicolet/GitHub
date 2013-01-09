@@ -107,6 +107,17 @@ public class Actualiser{
 				Ihm.tfBatCo1.setBackground(new Color(255,255,255));
 				Ihm.tfBatCo2.setBackground(new Color(255,255,255));
 			}
+			else if(Ihm.labPlacerBateau.getText() == "Torpilleur(2case)"){
+				Ihm.labNorth.setForeground(new Color(255,0,0));
+				Ihm.labNorth.setText("Attente autre Joueur ...");
+				Ihm.labPlacerBateau.setText("");
+				Ihm.butValiderPlacement.setEnabled(false);
+				Ihm.tfBatCo1.setEnabled(false);
+				Ihm.tfBatCo2.setEnabled(false);
+				Ihm.tfBatCo1.setBackground(new Color(0,0,0));
+				Ihm.tfBatCo2.setBackground(new Color(0,0,0));
+				Ihm.jeux.Com.reqAttente();
+			}
 		}
 				
 		//Si JoueurIA et Création Nouvelle partie Pas OK
@@ -121,6 +132,37 @@ public class Actualiser{
 				Ihm.tfBatCo1.setBackground(new Color(255,255,255));
 				Ihm.tfBatCo2.setBackground(new Color(255,255,255));
 			
+		}
+		
+		if(etat.equals("pres")){
+			int temp=0;
+			float temp2=0;
+			tab = xml.getGrilleTactique();
+			for(int i=0;i<100;i++){
+				if(tab[i].equals("1")){
+					temp = i/10;
+					temp2 = (float) ((float) i/10.0);
+					System.out.println("z"+temp2);
+					temp2 = (float) ((temp2 + 0.01) - temp);	
+					System.out.println("z"+temp2);
+					temp2 = temp2*10;
+					System.out.println("z"+temp2);
+					Ihm.CaseE[(int) temp+1][(int) temp2+1].setBackground(new Color(255,255,255));	
+					System.out.println(""+i);
+					System.out.println(""+(int) temp);
+					System.out.println(""+(int) temp2);
+				}else{
+					System.out.println("non"+tab[i]+"non");
+				}
+			}
+			Ihm.labNorth.setForeground(new Color(255,255,255));
+			Ihm.labNorth.setText("Jouer");
+			Ihm.labPlacerBateau.setText("Case");
+			Ihm.butValiderPlacement.setEnabled(true);
+			Ihm.tfBatCo1.setEnabled(true);
+			Ihm.tfBatCo2.setEnabled(true);
+			Ihm.tfBatCo1.setBackground(new Color(255,255,255));
+			Ihm.tfBatCo2.setBackground(new Color(255,255,255));
 		}
 	}
 }

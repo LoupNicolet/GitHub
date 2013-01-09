@@ -48,6 +48,13 @@ public class Communication implements Runnable {
 		envoiReception();
 	}
 	
+	//Envoi requete, attente pour simuler le joueur IA ou attendre l'autre joueur
+	public void reqAttente(){
+		//http://127.0.0.1/Serveur.php?action=attente&idpartie=1&nom=Joueur1$tour=0
+		requete = "action=attente&idpartie=" + jeux.getIdPartie() + "&tour=" + xml.getTour() + "&nom=" + xml.getNomJoueur();		
+		envoiReception();
+	}
+	
 	//Envoi requete, placement d'un bateau
 	public void reqValiderPlacement(String Bateau,String Co1,String Co2){
 		//http://127.0.0.1/Serveur.php?action=placement&idpartie=1&nom=Joueur1&bateau=Porte-Avion(5case)&co1=A2&co2=D7

@@ -18,4 +18,12 @@ else if($_GET["action"] == "Retplacement"){
 		$xml = simplexml_load_file("XML.xml");
 		echo $xml->asXml();
 }
+else if($_GET["action"] == "attente"){
+		 header('location:Ecriture_BDD.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&tour='.$_GET["tour"].'&nom='.$_GET["nom"]);
+}
+else if($_GET["action"] == "Retattente"){
+		header("Content-type:text/xml");
+		$xml = simplexml_load_file("XML.xml");
+		echo $xml->asXml();
+}
 ?>

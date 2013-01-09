@@ -45,8 +45,13 @@ public class IHM extends JFrame implements ActionListener {
 	//Variables
 	private int caseLigCur = 0;
 	private int caseColCur = 0;
+	private boolean vrai = true;
+	private int nbclic = 0;
 	//Objet
-	private Jeux jeux = new Jeux(this);
+	public Jeux jeux = new Jeux(this);
+	//Couleur
+	private Color couleur = new Color(0,0,0);
+	private Color back = new Color(0,0,0);
 	
 	////////////////////////////////////////////Constructeur
 	public IHM() {
@@ -76,6 +81,7 @@ public class IHM extends JFrame implements ActionListener {
 		for(int lig=0;lig<11;lig++){
 			for(int col=0;col<11;col++){
 				CaseE[lig][col].addMouseListener(mouseListener);
+				CaseW[lig][col].addMouseListener(mouseListener);
 				CaseE[lig][col].setName(""+lig+col);
 				CaseW[lig][col].setName(""+lig+col);
 				
@@ -110,29 +116,70 @@ public class IHM extends JFrame implements ActionListener {
 				//Recuperation de la case
 				Case(e);
 				//Changement de sa couleur
-				CaseE[caseLigCur+1][caseColCur+1].setBackground(new Color(0,0,100));
+				if(vrai){
+					couleur = new Color(255,255,255);
+					back = CaseE[caseLigCur+1][caseColCur+1].getBackground();
+					if(back.equals(couleur)){
+						CaseE[caseLigCur+1][caseColCur+1].setBackground(new Color(0,0,100));
+					}else{
+						CaseE[caseLigCur+1][caseColCur+1].setBackground(new Color(255,255,255));
+					}
+				}else{
+					couleur = new Color(255,255,255);
+					back = CaseW[caseLigCur+1][caseColCur+1].getBackground();
+					if(back.equals(couleur)){
+						CaseW[caseLigCur+1][caseColCur+1].setBackground(new Color(0,0,100));
+					}else{
+						CaseW[caseLigCur+1][caseColCur+1].setBackground(new Color(255,255,255));
+					}
+				}
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				Case(e);
-				CaseE[caseLigCur+1][caseColCur+1].setBackground(new Color(255,255,255));
+				if(vrai){
+					couleur = new Color(255,255,255);
+					back = CaseE[caseLigCur+1][caseColCur+1].getBackground();
+					if(back.equals(couleur)){
+						CaseE[caseLigCur+1][caseColCur+1].setBackground(new Color(255,0,255));
+					}else{
+						CaseE[caseLigCur+1][caseColCur+1].setBackground(new Color(255,255,255));
+					}
+				}else{
+					couleur = new Color(255,255,255);
+					back = CaseW[caseLigCur+1][caseColCur+1].getBackground();
+					if(back.equals(couleur)){
+						CaseW[caseLigCur+1][caseColCur+1].setBackground(new Color(255,0,255));
+					}else{
+						CaseW[caseLigCur+1][caseColCur+1].setBackground(new Color(255,255,255));
+					}
+				}
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Case(e);
-				System.out.printf("Click : %d - %d\n",caseLigCur,caseColCur);
+				System.out.printf("Click1 : %d - %d\n",caseLigCur,caseColCur);
+				nbclic++;
+				if(nbclic == 1){
+					tfBatCo1.setText(""+caseLigCur+caseColCur);
+				}else if(nbclic == 2){
+					tfBatCo2.setText(""+caseLigCur+caseColCur);
+				}else{
+					nbclic = 0;
+					tfBatCo1.setText("");
+					tfBatCo2.setText("");
+				}
 			}
 		};
 	}
 	
 /////////////////////////	
 	
-	//Recuperation de la case
+	//Recuperation de la case 1
 	public void Case(MouseEvent e){
 		//déclaration de variable
 		int ligne = 0;
 		int colone = 0;
-	
 		for(int i=1;i<11;i++){
 			ligne++;
 			for(int j=1;j<11;j++){
@@ -146,12 +193,19 @@ public class IHM extends JFrame implements ActionListener {
 					caseLigCur = ligne-1;
 					j = 1000;
 					i = 1000;
+					vrai = true;
+				}else if(e.getSource() == CaseW[i][j]){
+					caseColCur = colone-1;
+					caseLigCur = ligne-1;
+					j = 1000;
+					i = 1000;
+					vrai = false;
 				}
 			}
 		}
 		
 	}
-	
+
 /////////////////////////	
 	
 	//Lorqu'un bouton est pressé, on execute cette fonction

@@ -8,7 +8,7 @@ public class Jeux {
 	
 	/////////////////////////Déclarations
 	
-	private Communication Com;
+	public Communication Com;
 	public IHM Ihm;
 	
 	private String Serveur="127.0.0.1";
