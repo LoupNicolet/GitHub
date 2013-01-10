@@ -26,4 +26,12 @@ else if($_GET["action"] == "Retattente"){
 		$xml = simplexml_load_file("XML.xml");
 		echo $xml->asXml();
 }
+else if($_GET["action"] == "joue"){
+		header('location:Ecriture_BDD.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&nom='.$_GET['nom'].'&tour='.$_GET['tour'].'&co='.$_GET['co']);	
+}
+else if($_GET["action"] == "Retjoue"){
+		header("Content-type:text/xml");
+		$xml = simplexml_load_file("XML.xml");
+		echo $xml->asXml();
+}
 ?>

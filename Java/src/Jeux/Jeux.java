@@ -38,11 +38,16 @@ public class Jeux {
 	
 	//Lors de l'appui sur le bouton ValiderPlacement	
 	public void ValiderPlacement(String BatCo1, String BatCo2){
-		Ihm.labNorth.setText("Placement de "+Ihm.labPlacerBateau.getText()+" ...");
 		Ihm.tfBatCo1.setBackground(new Color(0,0,0));
 		Ihm.tfBatCo2.setBackground(new Color(0,0,0));
 		Ihm.butValiderPlacement.setEnabled(false);
-		Com.reqValiderPlacement(Ihm.labPlacerBateau.getText(),Ihm.tfBatCo1.getText(),Ihm.tfBatCo2.getText());
+		if(Ihm.labNorth.getText().equals("Jouer")){
+			Ihm.labNorth.setText("Attente Resultat ...");
+			Com.reqAJoue(Ihm.tfBatCo1.getText());
+		}else{
+			Ihm.labNorth.setText("Placement de "+Ihm.labPlacerBateau.getText()+" ...");
+			Com.reqValiderPlacement(Ihm.labPlacerBateau.getText(),Ihm.tfBatCo1.getText(),Ihm.tfBatCo2.getText());
+		}
 	}
 
 	/////////////////////////////////////Accesseurs

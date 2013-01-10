@@ -119,7 +119,7 @@
 				$Split_Chemin = str_split($Chemin);
 				$faux = false;
 				for($i = 1;$i<($boucle+1);$i++){
-					echo "i:".$i."a:".$a."faux:".$faux."<br>";
+					//echo "i:".$i."a:".$a."faux:".$faux."<br>";
 					$reponse = $bdd->query('SELECT valeur FROM '.$_GET['idpartie'].'_'.$nom.' WHERE ID = '.$Split_Chemin[($i*2)-2].$Split_Chemin[($i*2)-1]);
 					$donnees = $reponse->fetch();
 					//echo $donnees[0];
@@ -143,7 +143,29 @@
 			header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&tour='.$_GET["tour"].'&nom='.$_GET["nom"].'&valide=true');
 			exit();
 		}else{
-		echo "au revoir";
+		//echo "au revoir";
 		}
+	}
+	
+	else if($_GET["action"] == "joue"){
+		if($_GET["nom"] == "joueur1"){
+			$nom = "joueur2";
+		}else{
+			$nom = "joueur1";
+		}
+		$Split_Case = str_split($_GET["co"]);
+		$reponse = $bdd->query('SELECT valeur FROM '.$_GET['idpartie'].'_'.$nom.' WHERE ID = '.$Split_Case[0].$Split_Case[1]);
+		$donnees = $reponse->fetch();
+		if($donnees[0] == 0){
+			$bdd->query('UPDATE '.$_GET['idpartie'].'_'.$nom.' SET valeur="2" WHERE ID='.$Split_Case[0].$Split_Case[1]);
+			header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&tour='.$_GET["tour"].'&nom='.$_GET["nom"].'&valide=true');
+		}else if($donnees[0] == 1){
+			$bdd->query('UPDATE '.$_GET['idpartie'].'_'.$nom.' SET valeur="3" WHERE ID='.$Split_Case[0].$Split_Case[1]);
+			header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&tour='.$_GET["tour"].'&nom='.$_GET["nom"].'&valide=true');
+		}else if($donnees[0] == 2){
+			header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&tour='.$_GET["tour"].'&nom='.$_GET["nom"].'&valide=false');
+		}else{
+			header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&tour='.$_GET["tour"].'&nom='.$_GET["nom"].'&valide=true');
+		}		
 	}
 ?>

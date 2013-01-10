@@ -54,17 +54,9 @@ public class Actualiser{
 				if(tab[i].equals("1")){
 					temp = i/10;
 					temp2 = (float) ((float) i/10.0);
-					System.out.println("z"+temp2);
 					temp2 = (float) ((temp2 + 0.01) - temp);	
-					System.out.println("z"+temp2);
 					temp2 = temp2*10;
-					System.out.println("z"+temp2);
-					Ihm.CaseW[(int) temp+1][(int) temp2+1].setBackground(new Color(255,255,255));	
-					System.out.println(""+i);
-					System.out.println(""+(int) temp);
-					System.out.println(""+(int) temp2);
-				}else{
-					System.out.println("non"+tab[i]+"non");
+					Ihm.CaseW[(int) temp+1][(int) temp2+1].setBackground(new Color(100,100,100));	
 				}
 			}
 			if(Ihm.labPlacerBateau.getText() == "Porte-Avion(5case)"){
@@ -142,17 +134,9 @@ public class Actualiser{
 				if(tab[i].equals("1")){
 					temp = i/10;
 					temp2 = (float) ((float) i/10.0);
-					System.out.println("z"+temp2);
 					temp2 = (float) ((temp2 + 0.01) - temp);	
-					System.out.println("z"+temp2);
 					temp2 = temp2*10;
-					System.out.println("z"+temp2);
-					Ihm.CaseE[(int) temp+1][(int) temp2+1].setBackground(new Color(255,255,255));	
-					System.out.println(""+i);
-					System.out.println(""+(int) temp);
-					System.out.println(""+(int) temp2);
-				}else{
-					System.out.println("non"+tab[i]+"non");
+					Ihm.CaseE[(int) temp+1][(int) temp2+1].setBackground(new Color(100,100,100));	
 				}
 			}
 			Ihm.labNorth.setForeground(new Color(255,255,255));
@@ -160,9 +144,41 @@ public class Actualiser{
 			Ihm.labPlacerBateau.setText("Case");
 			Ihm.butValiderPlacement.setEnabled(true);
 			Ihm.tfBatCo1.setEnabled(true);
-			Ihm.tfBatCo2.setEnabled(true);
 			Ihm.tfBatCo1.setBackground(new Color(255,255,255));
-			Ihm.tfBatCo2.setBackground(new Color(255,255,255));
+		}
+		
+		if(etat.equals("joue")){
+			int temp=0;
+			float temp2=0;
+			tab = xml.getGrilleTactique();
+			for(int i=0;i<100;i++){
+				if(tab[i].equals("1")){
+					temp = i/10;
+					temp2 = (float) ((float) i/10.0);
+					temp2 = (float) ((temp2 + 0.01) - temp);	
+					temp2 = temp2*10;
+					Ihm.CaseE[(int) temp+1][(int) temp2+1].setBackground(new Color(100,100,100));	
+				}else if(tab[i].equals("2")){
+					temp = i/10;
+					temp2 = (float) ((float) i/10.0);
+					temp2 = (float) ((temp2 + 0.01) - temp);	
+					temp2 = temp2*10;
+					Ihm.CaseE[(int) temp+1][(int) temp2+1].setBackground(new Color(0,0,200));	
+				}else if(tab[i].equals("3")){
+					temp = i/10;
+					temp2 = (float) ((float) i/10.0);
+					temp2 = (float) ((temp2 + 0.01) - temp);	
+					temp2 = temp2*10;
+					Ihm.CaseE[(int) temp+1][(int) temp2+1].setBackground(new Color(175,0,0));	
+				}
+			}
+			Ihm.labNorth.setForeground(new Color(255,255,255));
+			Ihm.labNorth.setText("Joueur2...");
+			Ihm.labPlacerBateau.setText("Case");
+			Ihm.butValiderPlacement.setEnabled(false);
+			Ihm.tfBatCo1.setEnabled(false);
+			Ihm.tfBatCo1.setBackground(new Color(0,0,0));
+			//Ihm.jeux.Com.reqAttente();
 		}
 	}
 }

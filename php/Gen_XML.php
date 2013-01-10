@@ -89,6 +89,25 @@ if($Action == "attente"){
 	}
 }
 
+if($Action == "joue"){
+		$etat = "joue";
+		$Nom = $_GET['nom'];
+		$Tour = $_GET['tour'];
+		$Couleur = 'B';
+	for($i = 0 ; $i < 100 ; $i++){
+     
+	  $reponse = $bdd->query('SELECT valeur FROM '.$IdPartie.'_joueur1 WHERE ID = '.$i);
+	  $donnees = $reponse->fetch();
+	  $CaseFlotte[$i] = $donnees['valeur'];
+	  $reponse->closeCursor();
+	   
+	  $reponse = $bdd->query('SELECT valeur FROM '.$IdPartie.'_joueur2 WHERE ID = '.$i);
+	  $donnees= $reponse->fetch();
+	  $CaseTactique[$i] = $donnees['valeur'];
+	  $reponse->closeCursor();
+	}
+}
+
 $xml = <<<XML
 <?xml version="1.0" encoding="utf-8" ?>
 <partie id='$IdPartie'>
@@ -319,6 +338,12 @@ else if($Action == "placement"){
 
 else if($Action == "attente"){
 	$Action = 'Retattente';
+	header('location:Serveur.php?action='.$Action);
+	
+}
+
+else if($Action == "joue"){
+	$Action = 'Retjoue';
 	header('location:Serveur.php?action='.$Action);
 	
 }

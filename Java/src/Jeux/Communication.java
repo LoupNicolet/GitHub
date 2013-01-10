@@ -61,6 +61,12 @@ public class Communication implements Runnable {
 		requete = "action=placement&idpartie=" + jeux.getIdPartie() + "&nom=" + xml.getNomJoueur() + "&bateau=" + Bateau + "&co1=" + Co1 + "&co2=" + Co2;
 		envoiReception();
 	}
+	
+	public void reqAJoue(String Co1){
+		//http://127.0.0.1/Serveur.php?action=joue&idpartie=1&nom=Joueur1&tour=0&co=A2
+		requete = "action=joue&idpartie=" + jeux.getIdPartie() + "&nom=" + xml.getNomJoueur() + "&tour=" + xml.getTour() + "&co=" + Co1;
+		envoiReception();
+	}
 
 	///////////////////
 	
