@@ -140,7 +140,7 @@ public class Actualiser{
 				}
 			}
 			Ihm.labNorth.setForeground(new Color(255,255,255));
-			Ihm.labNorth.setText("Jouer");
+			Ihm.labNorth.setText("Jouez");
 			Ihm.labPlacerBateau.setText("Case");
 			Ihm.butValiderPlacement.setEnabled(true);
 			Ihm.tfBatCo1.setEnabled(true);
@@ -178,7 +178,42 @@ public class Actualiser{
 			Ihm.butValiderPlacement.setEnabled(false);
 			Ihm.tfBatCo1.setEnabled(false);
 			Ihm.tfBatCo1.setBackground(new Color(0,0,0));
-			//Ihm.jeux.Com.reqAttente();
+			Ihm.jeux.Com.reqAttente();
 		}
+		
+
+		if(etat.equals("Retjoue")){
+			int temp=0;
+			float temp2=0;
+			tab = xml.getGrilleFlotte();
+			for(int i=0;i<100;i++){
+				if(tab[i].equals("1")){
+					temp = i/10;
+					temp2 = (float) ((float) i/10.0);
+					temp2 = (float) ((temp2 + 0.01) - temp);	
+					temp2 = temp2*10;
+					Ihm.CaseW[(int) temp+1][(int) temp2+1].setBackground(new Color(100,100,100));	
+				}else if(tab[i].equals("2")){
+					temp = i/10;
+					temp2 = (float) ((float) i/10.0);
+					temp2 = (float) ((temp2 + 0.01) - temp);	
+					temp2 = temp2*10;
+					Ihm.CaseW[(int) temp+1][(int) temp2+1].setBackground(new Color(0,0,200));	
+				}else if(tab[i].equals("3")){
+					temp = i/10;
+					temp2 = (float) ((float) i/10.0);
+					temp2 = (float) ((temp2 + 0.01) - temp);	
+					temp2 = temp2*10;
+					Ihm.CaseE[(int) temp+1][(int) temp2+1].setBackground(new Color(175,0,0));	
+				}
+			}
+			Ihm.labNorth.setForeground(new Color(255,255,255));
+			Ihm.labNorth.setText("Jouez");
+			Ihm.labPlacerBateau.setText("Case");
+			Ihm.butValiderPlacement.setEnabled(true);
+			Ihm.tfBatCo1.setEnabled(true);
+			Ihm.tfBatCo1.setBackground(new Color(255,255,255));
+		}
+		
 	}
 }

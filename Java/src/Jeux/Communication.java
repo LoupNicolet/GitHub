@@ -19,9 +19,11 @@ public class Communication implements Runnable {
 	
 	private Document document;
 	private Thread thread;
+	private Attendre Att = new Attendre() ;
 	
 	private String requete = "";
 	public int action = 0;
+	private boolean attendre = false;
 	
 	/////////////////////////////////Constucteur
 	public Communication(Jeux jeux,IHM ihm){
@@ -51,7 +53,9 @@ public class Communication implements Runnable {
 	//Envoi requete, attente pour simuler le joueur IA ou attendre l'autre joueur
 	public void reqAttente(){
 		//http://127.0.0.1/Serveur.php?action=attente&idpartie=1&nom=Joueur1$tour=0
-		requete = "action=attente&idpartie=" + jeux.getIdPartie() + "&tour=" + xml.getTour() + "&nom=" + xml.getNomJoueur();		
+		attendre = true;
+		requete = "action=attente&idpartie=" + jeux.getIdPartie() + "&tour=" + xml.getTour() + "&nom=" + xml.getNomJoueur();
+		Att.req = requete;
 		envoiReception();
 	}
 	
@@ -73,27 +77,45 @@ public class Communication implements Runnable {
 	//Fonction executé lors du démarage du Thread
 	@Override
 	public void run() {
-		SAXBuilder sxb = new SAXBuilder();
-		 try {
-			 //Envoi et Reception du document
-			//document = new Document();
-			document = null;
-			document = sxb.build(new URL("http://" + jeux.getServeur() + "/" + "php" + "/" + "Serveur.php" + "?" + requete ));
-			System.out.println("Envoi Requette : " + "http://" + jeux.getServeur() + "/" + "php" + "/" +"Serveur.php" + "?" +requete);
-		} catch (MalformedURLException e) {
-			System.out.println("Mauvais Url");
-			e.printStackTrace();
-		} catch (JDOMException e) {
-			System.out.println("Erreur Document");
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.out.println("Erreur Reception");
-			e.printStackTrace();
+		if(attendre){
+			Att.start();
+			while( Att.isAlive() ) {
+				System.out.println("Attente Rep ...");
+			      try {
+			        // et faire une pause
+			        thread.sleep(1000);
+			      }
+			      catch (InterruptedException ex) {}
+			}
+			 System.out.printf("Doc : %s",document);
+			 //Lecture du XML
+			 xml.Parse(Att.doc);
+			 //Actualisation de l'affichage
+			
+		}else{
+			SAXBuilder sxb = new SAXBuilder();
+			 try {
+				 //Envoi et Reception du document
+				//document = new Document();
+				document = null;
+				document = sxb.build(new URL("http://" + jeux.getServeur() + "/" + "php" + "/" + "Serveur.php" + "?" + requete ));
+				System.out.println("Envoi Requette : " + "http://" + jeux.getServeur() + "/" + "php" + "/" +"Serveur.php" + "?" +requete);
+			} catch (MalformedURLException e) {
+				System.out.println("Mauvais Url");
+				e.printStackTrace();
+			} catch (JDOMException e) {
+				System.out.println("Erreur Document");
+				e.printStackTrace();
+			} catch (IOException e) {
+				System.out.println("Erreur Reception");
+				e.printStackTrace();
+			}
+		
+			 System.out.printf("Doc : %s",document);
+			 //Lecture du XML
+			 xml.Parse(document);
+			 //Actualisation de l'affichage
 		}
-		 System.out.printf("Doc : %s",document);
-		 //Lecture du XML
-		 xml.Parse(document);
-		 //Actualisation de l'affichage
 		 actualiser.actu(xml,thread);
 	}
 }

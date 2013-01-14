@@ -41,7 +41,7 @@ public class Jeux {
 		Ihm.tfBatCo1.setBackground(new Color(0,0,0));
 		Ihm.tfBatCo2.setBackground(new Color(0,0,0));
 		Ihm.butValiderPlacement.setEnabled(false);
-		if(Ihm.labNorth.getText().equals("Jouer")){
+		if(Ihm.labNorth.getText().equals("Jouez")){
 			Ihm.labNorth.setText("Attente Resultat ...");
 			Com.reqAJoue(Ihm.tfBatCo1.getText());
 		}else{
