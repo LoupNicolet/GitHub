@@ -69,7 +69,7 @@ public class Xml {
 						eTampTactique = eSousMenusGrillesTactique.get(j);
 						grilleTactique[j] = eTampTactique.getTextTrim();
 					}		
-					Afficher();
+					//Afficher();
 	}
 	
 //////////////////////////////////

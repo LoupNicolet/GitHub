@@ -33,6 +33,7 @@ public class Jeux {
 		Ihm.tfAdd.setBackground(new Color(0,0,0));
 		Ihm.tfIdPartie.setBackground(new Color(0,0,0));
 		//Envoi requette pour création nouvelle partie contre joueur IA
+		System.out.println("Partie Joueur IA");
 		Com.reqJoueurIA();
 	}
 	
@@ -43,8 +44,10 @@ public class Jeux {
 		Ihm.butValiderPlacement.setEnabled(false);
 		if(Ihm.labNorth.getText().equals("Jouez")){
 			Ihm.labNorth.setText("Attente Resultat ...");
+			System.out.println("Valide");
 			Com.reqAJoue(Ihm.tfBatCo1.getText());
 		}else{
+			System.out.println("Valide Placement");
 			Ihm.labNorth.setText("Placement de "+Ihm.labPlacerBateau.getText()+" ...");
 			Com.reqValiderPlacement(Ihm.labPlacerBateau.getText(),Ihm.tfBatCo1.getText(),Ihm.tfBatCo2.getText());
 		}

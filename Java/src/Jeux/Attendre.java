@@ -21,9 +21,9 @@ public class Attendre extends Thread {
 				 //Envoi et Reception du document
 				//document = new Document();
 				doc = null;
-				doc = sxb.build(new URL("http://" + Serveur + "/" + "php" + "/" + "Serveur.php" + "?" + req ));
 				System.out.println("Envoi Requette : " + "http://" + Serveur + "/" + "php" + "/" +"Serveur.php" + "?" +req);
-			} catch (MalformedURLException e) {
+				doc = sxb.build(new URL("http://" + Serveur + "/" + "php" + "/" + "Serveur.php" + "?" + req ));
+				} catch (MalformedURLException e) {
 				System.out.println("Mauvais Url");
 				e.printStackTrace();
 			} catch (JDOMException e) {
