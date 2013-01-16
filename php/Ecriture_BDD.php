@@ -83,7 +83,7 @@
 		}else{
 			$nom = "joueur1";
 		}
-		echo "salut";
+		//echo "salut";
 			for($a=0;$a<5;$a++){
 				if($a == 0){$boucle = 5;}
 				else if($a == 1){$boucle = 4;}
@@ -166,7 +166,7 @@
 			header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&tour='.$_GET["tour"].'&nom='.$_GET["nom"].'&valide=false');
 		}else{
 			header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&tour='.$_GET["tour"].'&nom='.$_GET["nom"].'&valide=true');
-		}		
+		}	
 	}
 	
 	else if($_GET["action"] == "attentejeu"){
