@@ -90,7 +90,11 @@ if($Action == "attente"){
 }
 
 if($Action == "joue"){
-		$etat = "joue";
+		if($Valide == "Win"){
+			$etat = "joueWin";
+		}else{
+			$etat = "joue";
+		}
 		$Nom = $_GET['nom'];
 		$Tour = $_GET['tour'];
 		$Couleur = 'B';
@@ -109,7 +113,11 @@ if($Action == "joue"){
 }
 
 if($Action == "attentejeu"){
-		$etat = "fin";
+		if($Valide == "Win"){
+			$etat = "finWin";
+		}else{
+			$etat = "fin";
+		}
 		$Nom = $_GET['nom'];
 		$Tour = $_GET['tour'];
 		$Couleur = 'B';

@@ -23,7 +23,7 @@
 			$bdd->exec('CREATE TABLE '.$_GET["idpartie"].'_Joueur1 (ID INT not null, valeur INT not null , PRIMARY KEY (ID))');
 			$bdd->exec('CREATE TABLE '.$_GET["idpartie"].'_Joueur2 (ID INT not null, valeur INT not null , PRIMARY KEY (ID))');
 			for($i = 0 ; $i < 100 ; $i++){
-				$bdd->exec('INSERT INTO '.$_GET["idpartie"].'_Joueur1 (ID,valeur) VALUES ('.$i.',0)');
+				$bdd->c('INSERT INTO '.$_GET["idpartie"].'_Joueur1 (ID,valeur) VALUES ('.$i.',0)');
 				$bdd->exec('INSERT INTO '.$_GET["idpartie"].'_Joueur2 (ID,valeur) VALUES ('.$i.',0)');
 			}
 			header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&valide=vrai');
@@ -153,6 +153,15 @@
 		}else{
 			$nom = "joueur1";
 		}
+		$req = "";
+		for($i = 0 ; $i < 100 ; $i++){
+			$reponse = $bdd->query('SELECT valeur FROM '.$_GET["idpartie"].'_joueur2 WHERE ID = '.$i);
+			$donnees= $reponse->fetch();
+			if($donnees[0] == 1){
+				$req = $req."1";
+			}
+			$reponse->closeCursor();
+		}
 		$Split_Case = str_split($_GET["co"]);
 		$reponse = $bdd->query('SELECT valeur FROM '.$_GET['idpartie'].'_'.$nom.' WHERE ID = '.$Split_Case[0].$Split_Case[1]);
 		$donnees = $reponse->fetch();
@@ -161,7 +170,12 @@
 			header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&tour='.$_GET["tour"].'&nom='.$_GET["nom"].'&valide=true');
 		}else if($donnees[0] == 1){
 			$bdd->query('UPDATE '.$_GET['idpartie'].'_'.$nom.' SET valeur="3" WHERE ID='.$Split_Case[0].$Split_Case[1]);
-			header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&tour='.$_GET["tour"].'&nom='.$_GET["nom"].'&valide=true');
+			exec('BN.exe '.$req,$output,$retour);
+			if($retour == 1){
+				header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&tour='.$_GET["tour"].'&nom='.$_GET["nom"].'&valide=Win');
+			}else{
+				header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&tour='.$_GET["tour"].'&nom='.$_GET["nom"].'&valide=true');
+			}
 		}else if($donnees[0] == 2){
 			header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&tour='.$_GET["tour"].'&nom='.$_GET["nom"].'&valide=false');
 		}else{
@@ -170,6 +184,16 @@
 	}
 	
 	else if($_GET["action"] == "attentejeu"){
+		$req = "";
+		for($i = 0 ; $i < 100 ; $i++){
+			$reponse = $bdd->query('SELECT valeur FROM '.$_GET["idpartie"].'_joueur1 WHERE ID = '.$i);
+			$donnees= $reponse->fetch();
+			if($donnees[0] == 1){
+				$req = $req."1";
+			}
+			$reponse->closeCursor();
+		}
+		echo $req;
 		$co = rand(0,99);
 		$Split_Case = str_split($co);
 		$reponse = $bdd->query('SELECT valeur FROM '.$_GET['idpartie'].'_'.$_GET["nom"].' WHERE ID = '.$Split_Case[0].$Split_Case[1]);
@@ -179,11 +203,17 @@
 			header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&tour='.$_GET["tour"].'&nom='.$_GET["nom"].'&valide=true');
 		}else if($donnees[0] == 1){
 			$bdd->query('UPDATE '.$_GET['idpartie'].'_'.$_GET["nom"].' SET valeur="3" WHERE ID='.$Split_Case[0].$Split_Case[1]);
-			header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&tour='.$_GET["tour"].'&nom='.$_GET["nom"].'&valide=true');
+			exec('BN.exe '.$req,$output,$retour);
+			if($retour == 1){
+				header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&tour='.$_GET["tour"].'&nom='.$_GET["nom"].'&valide=Win');
+			}else{
+				header('location:Gen_XML.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&tour='.$_GET["tour"].'&nom='.$_GET["nom"].'&valide=true');
+			}
 		}else if($donnees[0] == 2){
 			header('location:Ecriture_BDD.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&nom='.$_GET['nom'].'&tour='.$_GET['tour']);	
 		}else{
 			header('location:Ecriture_BDD.php?action='.$_GET["action"].'&idpartie='.$_GET["idpartie"].'&nom='.$_GET['nom'].'&tour='.$_GET['tour']);	
 		}	
 	}
+	
 ?>
