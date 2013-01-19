@@ -45,11 +45,15 @@ public class Jeux {
 		if(Ihm.labNorth.getText().equals("Jouez")){
 			Ihm.labNorth.setText("Attente Resultat ...");
 			System.out.println("Valide");
-			Com.reqAJoue(Ihm.tfBatCo1.getText());
+			Ihm.tfBatCo1.setText("");
+			Ihm.tfBatCo2.setText("");
+			Com.reqAJoue(BatCo1);
 		}else{
+			Ihm.tfBatCo1.setText("");
+			Ihm.tfBatCo2.setText("");
 			System.out.println("Valide Placement");
 			Ihm.labNorth.setText("Placement de "+Ihm.labPlacerBateau.getText()+" ...");
-			Com.reqValiderPlacement(Ihm.labPlacerBateau.getText(),Ihm.tfBatCo1.getText(),Ihm.tfBatCo2.getText());
+			Com.reqValiderPlacement(Ihm.labPlacerBateau.getText(),BatCo1,BatCo2);
 		}
 	}
 

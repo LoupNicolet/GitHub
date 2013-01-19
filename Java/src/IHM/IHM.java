@@ -71,7 +71,6 @@ public class IHM extends JFrame implements ActionListener {
 		initTextFields();
 		//Création des Listeners de la souris
 		MouseListener();
-		
 		//Ajout des actions sur les boutons
 		butArret.addActionListener(this);
 		butIA.addActionListener(this);
@@ -98,15 +97,12 @@ public class IHM extends JFrame implements ActionListener {
 		tfAdd.setBackground(new Color(255,255,255));
 		tfIdPartie.setBackground(new Color(255,255,255));
 		labNorth.setForeground(new Color(255,0,0));
-		
-		//Création d'une instance de Jeux
-		
 	}
 	
 	
 ////////////////////////////////////////////////////Fonctions	
 	
-	//Création des Listeners de la souris
+	//Listeners de la souris
 	public void MouseListener(){
 		mouseListener = new MouseListener() {
 			@Override
@@ -150,7 +146,9 @@ public class IHM extends JFrame implements ActionListener {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
+				//Recuperation de la case
 				Case(e);
+				//Changement de sa couleur
 				if(vrai){
 					couleur = new Color(100,100,100);
 					couleur2 = new Color(0,0,100);
@@ -183,17 +181,21 @@ public class IHM extends JFrame implements ActionListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				//Recuperation de la case
 				Case(e);
+				//ajout dans les tf
 				System.out.printf("Click1 : %d - %d\n",caseLigCur,caseColCur);
 				nbclic++;
-				if(nbclic == 1){
+				if(labPlacerBateau.getText() == "Case"){
 					tfBatCo1.setText(""+caseLigCur+caseColCur);
-				}else if(nbclic == 2){
-					tfBatCo2.setText(""+caseLigCur+caseColCur);
-				}else{
 					nbclic = 0;
-					tfBatCo1.setText("");
-					tfBatCo2.setText("");
+				}else{
+					if(nbclic == 1){
+						tfBatCo1.setText(""+caseLigCur+caseColCur);
+					}else if(nbclic == 2){
+						tfBatCo2.setText(""+caseLigCur+caseColCur);
+						nbclic = 0;
+					}
 				}
 			}
 		};
@@ -244,7 +246,7 @@ public class IHM extends JFrame implements ActionListener {
 		if (e.getSource()==butJouer) {}
 		if (e.getSource()==butJoueurHumain) {}
 		if (e.getSource()==butValiderPlacement) {
-			jeux.ValiderPlacement(tfBatCo1.getText(), tfBatCo2.getText());
+			jeux.ValiderPlacement(tfBatCo1.getText(),tfBatCo2.getText() );
 		}
 		if (e.getSource()==labNorth) {}
 	}

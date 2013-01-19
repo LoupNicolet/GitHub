@@ -48,17 +48,13 @@ public class Communication implements Runnable {
 	public void reqJoueurIA(){
 		//http://127.0.0.1/Serveur.php?action=joueurIA&idpartie=1
 		requete = "action=joueurIA&idpartie=" + jeux.getIdPartie();
-		//System.out.println("Requete : "+requete);
 		envoiReception();
 	}
 	
 	//Envoi requete, attente pour simuler le joueur IA ou attendre l'autre joueur
 	public void reqAttente(){
 		//http://127.0.0.1/Serveur.php?action=attente&idpartie=1&nom=Joueur1$tour=0
-		//attendre = true;
 		requete = "action=attente&idpartie=" + jeux.getIdPartie() + "&tour=" + xml.getTour() + "&nom=" + xml.getNomJoueur();
-		//Att.req = requete;
-		//Att.start();
 		System.out.println("Requete : "+requete);
 		envoiReception();
 	}
@@ -99,12 +95,11 @@ public class Communication implements Runnable {
 			while(Att.isAlive()) {
 				System.out.println("Attente Reponse ...");
 			      try {
-			        // et faire une pause
+			        // pause
 			        Thread.sleep(1000);
 			      }
 			      catch (InterruptedException ex) {}
 			}
-			 //System.out.printf("Doc222 : %s",document);
 			 //Lecture du XML
 			System.out.println("Exteraction XML");
 			 xml.Parse(Att.doc);
@@ -114,9 +109,8 @@ public class Communication implements Runnable {
 			SAXBuilder sxb = new SAXBuilder();
 			 try {
 				 //Envoi et Reception du document
-				//document = new Document();
 				document = null;
-				System.out.println("Envoi Requette : " + "http://" + jeux.getServeur() + "/" + "php" + "/" +"Serveur.php" + "?" +requete);
+				System.out.println("Envoi Requete : " + "http://" + jeux.getServeur() + "/" + "php" + "/" +"Serveur.php" + "?" +requete);
 				document = sxb.build(new URL("http://" + jeux.getServeur() + "/" + "php" + "/" + "Serveur.php" + "?" + requete ));
 				} catch (MalformedURLException e) {
 				System.out.println("Mauvais Url");
@@ -128,8 +122,6 @@ public class Communication implements Runnable {
 				System.out.println("Erreur Reception");
 				e.printStackTrace();
 			}
-		
-			 //System.out.printf("Doc : %s",document);
 			 //Lecture du XML
 			 System.out.println("Exteraction XML");
 			 xml.Parse(document);

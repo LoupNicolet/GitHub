@@ -6,32 +6,28 @@ $Bdd_user = "root";
 $Bdd_pass = "";
 
 try{
-	    $bdd = new PDO('mysql:host='.$Bdd_host.';dbname='.$Bdd_bdd, $Bdd_user, $Bdd_pass);
-	}
-	catch(Exception $e){
-        die('Erreur : '.$e->getMessage());
-    }
-	
-	
+	$bdd = new PDO('mysql:host='.$Bdd_host.';dbname='.$Bdd_bdd, $Bdd_user, $Bdd_pass);
+}
+catch(Exception $e){
+	die('Erreur : '.$e->getMessage());
+}
+
 if(isset($_GET["action"])){$Action = $_GET["action"];}else{$Action = "";}
 if(isset($_GET["idpartie"])){$IdPartie = $_GET["idpartie"];}else{$IdPartie = "";}
 if(isset($_GET["valide"])){$Valide = $_GET["valide"];}else{$Valide = "";}
-
 
 if($Action == "joueurIA"){
 	if($Valide == "vrai"){
 		$etat="vrai";
 		$Nom = 'joueur1';
 		$Tour = 0;
-		$Couleur = 'B';
 	}else if($Valide == "faux"){
 		$etat = "faux";
 		$Nom = 'joueur1';
 		$Tour = 0;
-		$Couleur = 'R';
 	}
 	for($i = 0 ; $i < 100 ; $i++){
-     
+	 
 	  $reponse = $bdd->query('SELECT valeur FROM '.$IdPartie.'_joueur1 WHERE ID = '.$i);
 	  $donnees = $reponse->fetch();
 	  $CaseFlotte[$i] = $donnees['valeur'];
@@ -49,15 +45,13 @@ if($Action == "placement"){
 		$etat = "vraiPlacement";
 		$Nom = 'joueur1';
 		$Tour = 0;
-		$Couleur = 'B';
 	}else if($Valide == "faux"){
 		$etat = "fauxPlacement";
 		$Nom = 'joueur1';
 		$Tour = 0;
-		$Couleur = 'R';
 	}
 	for($i = 0 ; $i < 100 ; $i++){
-     
+	 
 	  $reponse = $bdd->query('SELECT valeur FROM '.$IdPartie.'_joueur1 WHERE ID = '.$i);
 	  $donnees = $reponse->fetch();
 	  $CaseFlotte[$i] = $donnees['valeur'];
@@ -74,9 +68,8 @@ if($Action == "attente"){
 		$etat = "pres";
 		$Nom = $_GET['nom'];
 		$Tour = $_GET['tour'];
-		$Couleur = 'B';
 	for($i = 0 ; $i < 100 ; $i++){
-     
+	 
 	  $reponse = $bdd->query('SELECT valeur FROM '.$IdPartie.'_joueur1 WHERE ID = '.$i);
 	  $donnees = $reponse->fetch();
 	  $CaseFlotte[$i] = $donnees['valeur'];
@@ -97,9 +90,8 @@ if($Action == "joue"){
 		}
 		$Nom = $_GET['nom'];
 		$Tour = $_GET['tour'];
-		$Couleur = 'B';
 	for($i = 0 ; $i < 100 ; $i++){
-     
+	 
 	  $reponse = $bdd->query('SELECT valeur FROM '.$IdPartie.'_joueur1 WHERE ID = '.$i);
 	  $donnees = $reponse->fetch();
 	  $CaseFlotte[$i] = $donnees['valeur'];
@@ -120,9 +112,8 @@ if($Action == "attentejeu"){
 		}
 		$Nom = $_GET['nom'];
 		$Tour = $_GET['tour'];
-		$Couleur = 'B';
 	for($i = 0 ; $i < 100 ; $i++){
-     
+	 
 	  $reponse = $bdd->query('SELECT valeur FROM '.$IdPartie.'_joueur1 WHERE ID = '.$i);
 	  $donnees = $reponse->fetch();
 	  $CaseFlotte[$i] = $donnees['valeur'];
@@ -355,30 +346,22 @@ $Partie = new SimpleXMLElement($xml);
 if($Action == "joueurIA"){
 	$Action = 'RetJoueurIA';
 	header('location:Serveur.php?action='.$Action);
-	
 }
 else if($Action == "placement"){
 	$Action = 'Retplacement';
 	header('location:Serveur.php?action='.$Action);
-	
 }
-
 else if($Action == "attente"){
 	$Action = 'Retattente';
 	header('location:Serveur.php?action='.$Action);
-	
 }
-
 else if($Action == "joue"){
 	$Action = 'Retjoue';
-	header('location:Serveur.php?action='.$Action);
-	
+	header('location:Serveur.php?action='.$Action);	
 }
-
 else if($Action == "attentejeu"){
 	$Action = 'Retattentejeu';
 	header('location:Serveur.php?action='.$Action);
-	
 }
 
 $File = fopen("XML.xml", 'w+');
